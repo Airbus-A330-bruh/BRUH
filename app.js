@@ -27,7 +27,8 @@ peer.on('connection', (incomingConn) => {
 });
 
 
-function connectToPeer() {
+function connectToPeer(console.log("Attempting connection...");
+conn.on('error', err => console.error("CONNECTION ERROR:", err));) {
   const remoteId = document.getElementById("peerIdInput").value;
   conn = peer.connect(remoteId);
   
