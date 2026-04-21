@@ -15,6 +15,8 @@ peer.on('open', (id) => {
   document.getElementById('my-id').innerText = id;
   updateStatus();
 });
+peer.on('open', id => console.log("PEER OPEN:", id));
+peer.on('error', err => console.error("PEER ERROR:", err));
 
 
 let conn;
