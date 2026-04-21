@@ -27,19 +27,28 @@ peer.on('connection', (incomingConn) => {
 });
 
 
-function connectToPeer(console.log("Attempting connection...");
-conn.on('error', err => console.error("CONNECTION ERROR:", err));) {
+function connectToPeer() {
   const remoteId = document.getElementById("peerIdInput").value;
+
+  console.log("Attempting connection to:", remoteId);
+
   conn = peer.connect(remoteId);
-  
-  conn.on('open', function() {
+
+  conn.on('open', () => {
+    console.log("CONNECTED");
+    updateStatus();
+    setupChat(); // only here
+  });
+
+  conn.on('error', (err) => {
+    console.error("Connection error:", err);
+  });
+
+  conn.on('close', () => {
+    console.log("Connection closed");
     updateStatus();
   });
-  
-  setupChat();
 }
-
-
 function setupChat() {
   conn.on('data', (data) => {
    
