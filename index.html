@@ -18,7 +18,7 @@
 <button onclick="connectToPeer()">Connect</button>
 <p>Your ID: <span id="my-id">...</span></p>
 <!-- HTML !-->
-<button class="button-85" role="button">Button 85</button>
+
 
 
 <h2>Try some xss here</h2>
@@ -34,8 +34,14 @@
 // "unique" id? no
 // sorry for the cringe name lol
 const randomNum = Math.floor(Math.random() * 1000);
-const peer = new Peer('test-id-' + randomNum); 
-
+const peer = new Peer('test-id-' + Math.floor(Math.random() * 1000), {
+  config: {
+    'iceServers': [
+      { urls: 'stun:stun.l.google.com:19302' }, 
+      { urls: 'stun:stun1.l.google.com:19302' }
+    ]
+  }
+});
 
 // share ur id to be even more vulnerable yay
 peer.on('open', (id) => {
