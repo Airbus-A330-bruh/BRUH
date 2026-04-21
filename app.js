@@ -3,7 +3,7 @@
 const randomNum = Math.floor(Math.random() * 1000);
 const peer = new Peer('test-id-' + Math.floor(Math.random() * 1000), { // random id generation
   config: {
-    'iceServers': [
+    'iceServers': [  //theres gotta be smth better than webrtc
       { urls: 'stun:stun.l.google.com:19302' }, 
       { urls: 'stun:stun1.l.google.com:19302' }                        // stun servers to fix device communication i think
     ]
@@ -26,7 +26,7 @@ peer.on('connection', (incomingConn) => {
   setupChat();
 });
 
-
+// i hate this
 function connectToPeer() {
   const remoteId = document.getElementById("peerIdInput").value;
 
@@ -48,7 +48,7 @@ function connectToPeer() {
     console.log("Connection closed");
     updateStatus();
   });
-}
+} // work? pls???
 function setupChat() {
   conn.on('data', (data) => {
    
@@ -67,15 +67,13 @@ function inject() {
   // show it on screen
   document.getElementById("output").innerHTML += "<div>You: " + userInput + "</div>";
 
-  // If connected, send input to peer
+  // tell peer ur connected
   if (conn && conn.open) {
     conn.send(userInput);
   }
 
 
-}
-
-// Update status display function
+//status display kinda
 function updateStatus() {
   document.getElementById('status-my-id').textContent = peer.id || 'Loading...';
   document.getElementById('status-connected').textContent = (conn && conn.open) ? 'Yes' : 'No';
