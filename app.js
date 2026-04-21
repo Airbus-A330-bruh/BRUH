@@ -71,7 +71,7 @@ function inject() {
   if (conn && conn.open) {
     conn.send(userInput);
   }
-
+}
 
 //status display kinda
 function updateStatus() {
